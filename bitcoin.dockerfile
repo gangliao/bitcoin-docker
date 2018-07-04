@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     wget unzip unrar tar xz-utils bzip2 gzip coreutils \
     curl sed grep vim librdmacm-dev libibverbs-dev libboost-all-dev \
     automake locales clang-format cmake libtool bsdmainutils libevent-dev \
+    openssl libssl-dev libcurl4-openssl-dev \
     && apt-get clean -y
 
 # Set the locale
