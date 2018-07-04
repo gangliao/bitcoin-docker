@@ -24,6 +24,7 @@ RUN wget http://download.oracle.com/berkeley-db/db-4.8.30.zip
 RUN unzip db-4.8.30.zip && cd db-4.8.30/build_unix/
 RUN ../dist/configure --prefix=/usr/local --enable-cxx
 RUN make -j8 && make install
+RUN rm -rf ../../db-4.8.30
 
 # git credential to skip password typing
 RUN git config --global credential.helper store
