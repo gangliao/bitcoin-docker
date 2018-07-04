@@ -7,7 +7,7 @@ RUN /bin/bash -c 'if [[ -n ${UBUNTU_MIRROR} ]]; then sed -i 's#http://archive.ub
 RUN apt-get update && apt-get install -y --no-install-recommends \
     git python3-pip python3-dev openssh-server g++ pkg-config \
     wget unzip unrar tar xz-utils bzip2 gzip coreutils \
-    curl sed grep vim librdmacm-dev libibverbs-dev \
+    curl sed grep vim librdmacm-dev libibverbs-dev libboost-all-dev \
     automake locales clang-format cmake libtool bsdmainutils libevent-dev \
     && apt-get clean -y
 
