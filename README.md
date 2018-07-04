@@ -37,7 +37,7 @@ Building Bitcoin in Image ...
 ============================================
 EOF
 
-docker run -d -it -v `pwd`:/bitcoin-docker ${IMAGE}:${TAG} /bin/bash
+docker run --net=host -d -it -v `pwd`:/bitcoin-docker ${IMAGE}:${TAG} /bin/bash
 
 bash /bitcoin-docker/build.sh
 ```
