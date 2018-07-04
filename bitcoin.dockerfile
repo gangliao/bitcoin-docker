@@ -22,7 +22,7 @@ ENV LC_ALL en_US.UTF-8
 RUN wget http://download.oracle.com/berkeley-db/db-4.8.30.zip
 RUN unzip db-4.8.30.zip && cd db-4.8.30/build_unix/
 RUN ../dist/configure --prefix=/usr/local --enable-cxx
-RUN make && make install
+RUN make -j8 && make install
 
 # git credential to skip password typing
 RUN git config --global credential.helper store
