@@ -5,7 +5,7 @@ ARG UBUNTU_MIRROR
 RUN /bin/bash -c 'if [[ -n ${UBUNTU_MIRROR} ]]; then sed -i 's#http://archive.ubuntu.com/ubuntu#${UBUNTU_MIRROR}#g' /etc/apt/sources.list; fi'
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    git python3-pip python3-dev openssh-server \
+    git python3-pip python3-dev openssh-server g++ pkg-config \
     wget unzip unrar tar xz-utils bzip2 gzip coreutils \
     curl sed grep vim librdmacm-dev libibverbs-dev \
     automake locales clang-format cmake libtool \
@@ -17,6 +17,12 @@ RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
 ENV LANG en_US.UTF-8 
 ENV LANGUAGE en_US:en 
 ENV LC_ALL en_US.UTF-8
+
+# berkeley-db/db-4.8.30
+RUN wget http://download.oracle.com/berkeley-db/db-4.8.30.zip
+RUN unzip db-4.8.30.zip && cd db-4.8.30/build_unix/
+RUN ../dist/configure --prefix=/usr/local --enable-cxx
+RUN make && make install
 
 # git credential to skip password typing
 RUN git config --global credential.helper store
