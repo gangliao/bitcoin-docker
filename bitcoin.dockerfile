@@ -33,4 +33,11 @@ ENV NOTVISIBLE "in users profile"
 RUN echo "export VISIBLE=now" >> /etc/profile
 
 EXPOSE 22
-CMD ["/usr/sbin/sshd", "-D"]
+
+RUN echo "cd /" >> /etc/profile
+
+RUN mkdir /root/.ssh/
+RUN touch /root/.ssh/environment
+
+CMD env >> /root/.ssh/environment; export -p | grep _ >> /etc/profile; /usr/sbin/sshd -D;
+
