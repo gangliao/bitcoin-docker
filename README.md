@@ -7,7 +7,7 @@ git clone https://github.com/gangliao/bitcoin-docker
 git submodule update --init --recursive
 ```
 
-## Build Bitcoin in Docker
+## Build Dev Image
 
 ```bash
 cat <<EOF
@@ -26,20 +26,18 @@ docker build --build-arg http_proxy=$http_proxy \
              --build-arg HTTPS_PROXY=$http_proxy \
              --build-arg UBUNTU_MIRROR=http://mirrors.163.com/ubuntu/ \
              -t bitcoin:latest -f ./bitcoin.dockerfile .
+```
 
+## Build Bitcoin in Docker
+
+```bash
 cat <<EOF
 ============================================
 Building Bitcoin in Image ...
 ============================================
 EOF
 
-docker run -d -it -v `pwd`:/bitcoin-docker ${IMAGE}:${TAG}
-docker_id=$(docker ps | grep $IMAGE:$TAG | awk '{print $1}')
-docker exec -t ${docker_id} "/bitcoin-docker/build.sh"
-```
+docker run -d -it -v `pwd`:/bitcoin-docker ${IMAGE}:${TAG} /bin/bash
 
-## Run Bitcoin in Docker
-
-```bash
-docker exec -it ${docker_id} bash
+bash /bitcoin-docker/build.sh
 ```
